@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaurant',
     'rest_framework',
+    'rest_framework.authtoken',
+    'restaurant',
     'djoser',
-    
 ]
 
 MIDDLEWARE = [
@@ -89,10 +89,10 @@ DATABASES = {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
          }
     },
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'sqlite': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
@@ -137,8 +137,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES' : [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
     ]
+}
+
+DJOSER = {
+    "USER_ID_FIELD" : "username"
 }

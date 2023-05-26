@@ -20,6 +20,7 @@ class UserViewSet(ModelViewSet):
 class MenuItemView(ListCreateAPIView):
     queryset = models.Menu.objects.all()
     serializer_class = serializers.MenuSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class SingleMenuItemView(RetrieveUpdateDestroyAPIView):
     queryset = models.Menu.objects.all()
